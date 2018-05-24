@@ -9,8 +9,7 @@ Created on Thu May 24 13:36:23 2018
 import matplotlib.pyplot as plt
 
 def start_market(state_market, number_of_companies):
-    states = {'high' : 1000, 'low' : 2000, 'stagnant': 1000}
-    #states[state_market] = number_of_companies
+    states = {'high' : 0, 'low' : 3000, 'stagnant': 1000}
     return states
 
 def update_market(states):
@@ -20,7 +19,7 @@ def update_market(states):
     return states
 
 
-times = 1000
+times = 50
 companies = 4000
 states = start_market('high', companies)
 
@@ -32,7 +31,10 @@ for time in range(times):
     state_in_time['stagnant'].append(states['stagnant'])
     states = update_market(states)
 
-plt.plot(state_in_time['high'])
-plt.plot(state_in_time['low'])
-plt.plot(state_in_time['stagnant'])
+line_1, = plt.plot(state_in_time['high'], label='high')
+line_2, = plt.plot(state_in_time['low'], label='low')
+line_3, = plt.plot(state_in_time['stagnant'], label='stagnant')
+plt.legend(handles=[line_1, line_2, line_3])
+plt.ylabel("companies")
+plt.xlabel("time")
 plt.show()
